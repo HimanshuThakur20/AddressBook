@@ -49,4 +49,19 @@ public class AddressBookService {
             System.out.println("value not found");
         }
     }
+
+    public void removeDetails(String searchKey,Person p){
+        AddressBookService s1 = new AddressBookService();
+
+        if(Objects.equals(p.getLastName(), searchKey)){
+            contactList.remove(1);
+            System.out.println("Details deleted");
+            s1.display(p);
+        }
+        else{
+            System.out.println("value not found");
+        }
+    }
+
+
 }
