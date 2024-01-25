@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 
 public class AddressBookService {
@@ -35,5 +36,17 @@ public class AddressBookService {
         System.out.println("Enter your phone number: ");
         Integer phn = Integer.valueOf(sc.next());
         p.setPhoneNumber(phn);
+    }
+
+    public void editDetails(String searchKey,Person p){
+
+        if(Objects.equals(p.getLastName(), searchKey)){
+            System.out.println("Enter new details: ");
+            setValues(p);
+            display(p);
+        }
+        else{
+            System.out.println("value not found");
+        }
     }
 }
