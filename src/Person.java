@@ -66,7 +66,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "\nPerson " +
+        return "Person " +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", State='" + State + '\'' +

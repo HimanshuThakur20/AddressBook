@@ -1,8 +1,4 @@
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.Map;
-import java.util.HashMap;
-
+import java.util.*;
 
 
 public class AddressBookService {
@@ -45,13 +41,12 @@ public class AddressBookService {
     public void editDetails(String searchName, AddressBook a1){
         for(Map.Entry<Integer, Person> entry : a1.contactList.entrySet()) {
             if(entry.getValue().getFirstName().equalsIgnoreCase(searchName)){
-                System.out.println("\nPerson found");
+                System.out.println("\n***Person found***");
                 Person p = new Person();
                 System.out.println("\nEnter new details");
                 setValues(p);
                 Integer key = entry.getKey();
                 a1.contactList.put(key,p);
-//            display(p);
             } else{
                 System.out.println("value not found");
             }
@@ -59,16 +54,28 @@ public class AddressBookService {
 
     }
 
-//    public void removeDetails(String searchKey){
-//        AddressBook a1 = new AddressBook();
-//
-//        if(a1.contactList.containsKey(searchKey)){
-//            a1.contactList.remove(searchKey);
-//            System.out.println("Details deleted");
-////            display(p);
-//        }
-//        else{
-//            System.out.println("value not found");
-//        }
-//    }
+    public void removeDetails(String nameToRemove, AddressBook a){
+        Iterator<Map.Entry<Integer,Person>> iterator = a.contactList.entrySet().iterator();
+        while (iterator.hasNext()){
+            Map.Entry<Integer,Person> entry = iterator.next();
+            if(entry.getValue().getFirstName().equalsIgnoreCase(nameToRemove)){
+                iterator.remove();
+                System.out.println("Details deleted");
+            }else {
+                System.out.println("value not found");
+            }
+        }
+    }
 }
+
+//previous code used for deleting which threw exception ConcurrentModificationException
+//        for(Map.Entry<Integer,Person> entry : a.contactList.entrySet()) {
+//            if (entry.getValue().getFirstName().equalsIgnoreCase(nameToRemove)) {
+////                Integer key=entry.getKey();
+////                a.contactList.remove(key);
+//                entry.remove();
+//                System.out.println("Details deleted");
+//            } else {
+//                System.out.println("value not found");
+//            }
+//        }
