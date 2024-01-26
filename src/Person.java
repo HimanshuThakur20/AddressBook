@@ -73,6 +73,6 @@ public class Person {
                 ", city='" + city + '\'' +
                 ", email='" + email + '\'' +
                 ", zip=" + zip +
-                ", phoneNumber=" + phoneNumber;
+                ", phoneNumber=" + phoneNumber + "\n";
     }
 }

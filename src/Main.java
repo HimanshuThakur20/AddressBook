@@ -1,12 +1,34 @@
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        ArrayList<AddressBook> addressBooks = new ArrayList<>(3);
+        Main m1 = new Main();
+
+        Integer numberOfElements = 2;
+
+        for (Integer i = 0; i < numberOfElements; i++) {
+            AddressBook adb = new AddressBook();
+            m1.createAddressBook(adb);
+            addressBooks.add(adb);
+        }
+
+        Integer count =1;
+        for (AddressBook addressBook : addressBooks){
+            System.out.println("\n\n*** Address Book "+count+"***");
+            System.out.println(addressBook);
+            count++;
+        }
+
+    }
+
+    //Function creating the address book
+    public  void createAddressBook(AddressBook a1){
         Scanner sc = new Scanner(System.in);
         System.out.println("\nWelcome to the Address book\n");
         AddressBookService s1 = new AddressBookService();
-        AddressBook a1 = new AddressBook();
         Main m1 = new Main();
 
 
@@ -43,9 +65,7 @@ public class Main {
         for (Map.Entry<Integer, Person> entry : a1.contactList.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
-
     }
-
     //Function for entering values in the hashmap
     public void insertValues(Person p, AddressBookService s, AddressBook a, Integer i) {
             System.out.println("Set the values:");
