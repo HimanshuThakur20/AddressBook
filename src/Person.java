@@ -63,4 +63,16 @@ public class Person {
     public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    @Override
+    public String toString() {
+        return "\nPerson " +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", State='" + State + '\'' +
+                ", city='" + city + '\'' +
+                ", email='" + email + '\'' +
+                ", zip=" + zip +
+                ", phoneNumber=" + phoneNumber;
+    }
 }
