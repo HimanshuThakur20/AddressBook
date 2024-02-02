@@ -8,6 +8,16 @@ public class Person {
     private Integer zip;
     private Integer phoneNumber;
 
+//    public Person(String firstName, String lastName, String state, String city, String email, Integer zip, Integer phoneNumber) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        State = state;
+//        this.city = city;
+//        this.email = email;
+//        this.zip = zip;
+//        this.phoneNumber = phoneNumber;
+//    }
+
     public String getFirstName() {
         return firstName;
     }
