@@ -29,13 +29,28 @@ public class AddressBookService {
         String email = sc.next();
         p.setEmail(email);
 
-        System.out.println("Enter your zip code: ");
-        Integer zip = Integer.valueOf(sc.next());
-        p.setZip(zip);
+        try{
+            System.out.println("Enter your zip code: ");
+            Integer zip = Integer.valueOf(sc.next());
+            p.setZip(zip);
+        }catch(NumberFormatException e){
+            System.out.println("\nKindly put an integer value otherwise next time program will be terminated");
+            System.out.println("Enter your zip code: ");
+            Integer zip = Integer.valueOf(sc.next());
+            p.setZip(zip);
+        }
 
-        System.out.println("Enter your phone number: ");
-        Integer phn = Integer.valueOf(sc.next());
-        p.setPhoneNumber(phn);
+        try{
+            System.out.println("Enter your phone number: ");
+            Integer phn = Integer.valueOf(sc.next());
+            p.setPhoneNumber(phn);
+        }catch(NumberFormatException e){
+            System.out.println("\nKindly put an integer value otherwise next time program will be terminated");
+            System.out.println("Enter your phone number: ");
+            Integer phn = Integer.valueOf(sc.next());
+            p.setPhoneNumber(phn);
+        }
+
     }
 
     public void editDetails(String searchName, AddressBook a1){
@@ -47,9 +62,10 @@ public class AddressBookService {
                 setValues(p);
                 Integer key = entry.getKey();
                 a1.contactList.put(key,p);
-            } else{
-                System.out.println("value not found");
+                return;
             }
+            System.out.println("value not found");
+
         }
 
     }
@@ -61,12 +77,24 @@ public class AddressBookService {
             if(entry.getValue().getFirstName().equalsIgnoreCase(nameToRemove)){
                 iterator.remove();
                 System.out.println("Details deleted");
-            }else {
-                System.out.println("value not found");
+                return;
             }
+            System.out.println("value not found");
+
+        }
+    }
+
+    public void displayAdressBook(ArrayList<AddressBook> addressBooks){
+        Integer count =1;
+        for (AddressBook addressBook : addressBooks){
+            System.out.println("\n\n*** Address Book "+count+"***");
+            System.out.println(addressBook);
+            count++;
         }
     }
 }
+
+
 
 //previous code used for deleting which threw exception ConcurrentModificationException
 //        for(Map.Entry<Integer,Person> entry : a.contactList.entrySet()) {
