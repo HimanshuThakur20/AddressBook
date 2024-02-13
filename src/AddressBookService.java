@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class AddressBookService {
@@ -30,31 +32,61 @@ public class AddressBookService {
         String state = sc.next();
         p.setState(state);
 
-        System.out.println("Enter your email: ");
-        String email = sc.next();
-        p.setEmail(email);
 
-        try{
-            System.out.println("Enter your zip code: ");
-            Integer zip = Integer.valueOf(sc.next());
-            p.setZip(zip);
-        }catch(NumberFormatException e){
-            System.out.println("\nKindly put an integer value otherwise next time program will be terminated");
-            System.out.println("Enter your zip code: ");
-            Integer zip = Integer.valueOf(sc.next());
-            p.setZip(zip);
+        Pattern emialPattern = Pattern.compile("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
+        do{
+            System.out.println("Enter your email: ");
+            String email = sc.nextLine();
+            Matcher matcher = emialPattern.matcher(email);
+            if(matcher.matches()){
+                p.setEmail(email);
+                break;
+            }else{
+                System.out.println("\nPlease input a proper email address with '@'");
+            }
+
+        }while (true);
+
+        Pattern zipPattern = Pattern.compile("^[0-9]{6}+$");
+        while(true) {
+            try {
+                System.out.println("Enter your zip code: ");
+                String zip = sc.nextLine();
+                Matcher matcher = zipPattern.matcher(zip);
+                if(matcher.matches()){
+                    p.setZip(zip);
+                }else {
+                    throw new NumberFormatException();
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("\nKindly put an integer value");
+//                sc.nextLine();
+            }
         }
 
-        try{
+//        try{
+
+        Pattern phnpattern = Pattern.compile("^[7-9]{1}[0-9]{9}+$");
+        do {
             System.out.println("Enter your phone number: ");
-            Integer phn = Integer.valueOf(sc.next());
-            p.setPhoneNumber(phn);
-        }catch(NumberFormatException e){
-            System.out.println("\nKindly put an integer value otherwise next time program will be terminated");
-            System.out.println("Enter your phone number: ");
-            Integer phn = Integer.valueOf(sc.next());
-            p.setPhoneNumber(phn);
-        }
+            String phn = sc.next();
+            Matcher matcher = phnpattern.matcher(phn);
+            if (matcher.matches()) {
+                p.setPhoneNumber(phn);
+                break;
+            } else {
+                System.out.println("\nPlease input 10 digit phone no. starting from 7-9");
+            }
+        }while (true);
+
+
+//        }catch(NumberFormatException e){
+//            System.out.println("\nKindly put an integer value otherwise next time program will be terminated");
+//            System.out.println("Enter your phone number: ");
+//            String phn = sc.next();
+//            p.setPhoneNumber(phn);
+//        }
 
     }
 
@@ -103,10 +135,18 @@ public class AddressBookService {
         Scanner sc = new Scanner(System.in);
         System.out.println("\nWelcome to the Address book\n");
         AddressBookService s1 = new AddressBookService();
-        Main m1 = new Main();
 
         System.out.println("How many address details you want to keep in the book (Please enter an integer)");
-        int noOfAddresses = sc.nextInt();
+        int noOfAddresses;
+        while(true) {
+            try {
+                noOfAddresses = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                System.out.println("\nPlease enter a number");
+                sc.nextLine();
+            }
+        }
 
         for (int i = 1; i <= noOfAddresses;i++) {
             Person p1 = new Person();

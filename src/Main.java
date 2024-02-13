@@ -14,8 +14,8 @@ public class Main {
             System.out.println("\nEnter what you want to perform---- \n" +
                     "1-Enter values in 1 address book \n" +
                     "2- Enter values in specified no of address books\n" +
-                    "3- Update values using name in an specefied address book\n" +
-                    "4- Delete a entry using name in an specefied address book)\n" +
+                    "3- Update values using name in an specified address book\n" +
+                    "4- Delete a entry using name in an specified address book)\n" +
                     "5- Display the address books\n" +
                     "0- Exit the address book system");
             int choice = sc.nextInt();

@@ -5,8 +5,8 @@ public class Person {
     private String State;
     private String city;
     private String email;
-    private Integer zip;
-    private Integer phoneNumber;
+    private String zip;
+    private String phoneNumber;
 
 //    public Person(String firstName, String lastName, String state, String city, String email, Integer zip, Integer phoneNumber) {
 //        this.firstName = firstName;
@@ -58,19 +58,19 @@ public class Person {
         this.email = email;
     }
 
-    public Integer getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(Integer zip) {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
