@@ -1,6 +1,11 @@
+import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 
 public class AddressBookService {
@@ -17,19 +22,19 @@ public class AddressBookService {
     public void setValues(Person p){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your first name: ");
-        String fn = sc.next();
+        String fn = sc.nextLine();
         p.setFirstName(fn);
 
         System.out.println("Enter your last name: ");
-        String ln = sc.next();
+        String ln = sc.nextLine();
         p.setLastName(ln);
 
         System.out.println("Enter your city name: ");
-        String city  = sc.next();
+        String city  = sc.nextLine();
         p.setCity(city);
 
         System.out.println("Enter your State name: ");
-        String state = sc.next();
+        String state = sc.nextLine();
         p.setState(state);
 
 
@@ -167,7 +172,7 @@ public class AddressBookService {
         a.contactList.put(i, p);
     }
 
-    public void displayAdressBook(ArrayList<AddressBook> addressBooks){
+    public static void displayAdressBook(ArrayList<AddressBook> addressBooks){
         Integer count =1;
         for (AddressBook addressBook : addressBooks){
             System.out.println("\n\n*** Address Book "+count+" ***");
@@ -220,5 +225,42 @@ public class AddressBookService {
                 System.out.println(entry.getKey() + ": " + entry.getValue());
             }
         }
+    }
+
+    public static  void fileHandler(String fileName, boolean pass,ArrayList<AddressBook>  A){
+
+        if(pass==true){
+            FileHandling fileHandling = ()->{
+                    try {
+                        FileOutputStream foo = new FileOutputStream(fileName);
+                        ObjectOutputStream oos = new ObjectOutputStream(foo);
+                        oos.writeObject(A);
+
+                        oos.close();
+                        foo.close();
+                        System.out.println("Address book saved successfully");
+                    } catch (IOException e){
+                        System.out.println("There is an exception in loading the file "+e);
+                    }
+            };
+            fileHandling.writeFile();
+        }else{
+            try {
+                FileInputStream fis = new FileInputStream(fileName);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                ArrayList<AddressBook>  A2;
+
+                A2 = ( ArrayList<AddressBook>) ois.readObject();
+                System.out.println("Addressbook retrived successfully");
+                displayAdressBook(A2);
+
+                ois.close();
+                fis.close();
+            }catch (IOException | ClassNotFoundException e) {
+                System.out.println("Exception occurred " + e);
+            }
+        }
+
+
     }
 }

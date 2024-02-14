@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -17,6 +18,8 @@ public class Main {
                     "3- Update values using name in an specified address book\n" +
                     "4- Delete a entry using name in an specified address book)\n" +
                     "5- Display the address books\n" +
+                    "6- Save Address books into a txt file\n" +
+                    "7- Retrive address books from a txt file\n" +
                     "0- Exit the address book system");
             int choice = sc.nextInt();
 
@@ -45,6 +48,14 @@ public class Main {
                     System.out.println("Displaying all address books");
                     s1.displayAdressBook(addressBooks);
                     break;
+                case 6:
+                    String fileName = "AddressBook.txt";
+                    s1.fileHandler(fileName,true,addressBooks);
+                    break;
+                case 7:
+                    String fileName2 = "AddressBook.txt";
+                    s1.fileHandler(fileName2,false,addressBooks);
+                    break;
                 default:
                     System.out.println("Invalid entry");
                     break;
@@ -52,5 +63,6 @@ public class Main {
         }
 
     }
+
 
 }

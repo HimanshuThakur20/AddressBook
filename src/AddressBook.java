@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class AddressBook {
+public class AddressBook implements Serializable {
     HashMap<Integer,Person> contactList = new HashMap<>();
 
     @Override
