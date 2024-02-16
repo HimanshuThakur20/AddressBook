@@ -19,11 +19,44 @@ public class AddressBookService {
     }
 
     // method to enter the values in class person
-    public void setValues(Person p){
+    public void setValues(Person p, AddressBook a){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your first name: ");
-        String fn = sc.nextLine();
-        p.setFirstName(fn);
+        Boolean flag = false;
+        String fn;
+
+        while (true){
+             fn = sc.nextLine();
+            String finalFn = fn.toLowerCase();
+
+            Optional<Integer> check = a.contactList.entrySet().stream().filter(integerPersonEntry -> integerPersonEntry.getValue().getFirstName().equalsIgnoreCase(finalFn)).map(Map.Entry::getKey).findFirst();
+
+            if(check.isPresent()){
+                System.out.println("Enter your first name again the previous entered name already exists: ");
+            }else{
+                p.setFirstName(fn);
+                break;
+            }
+        }
+
+
+
+
+//        for (AddressBook a : addressBooks){
+//            String finalFn = fn.toLowerCase();
+//            if(!(a.contactList.values().stream().map(obj-> Objects.equals(obj.getFirstName(), finalFn)).findAny().isPresent())){
+//                flag = true;
+//            }else{
+//                flag = false;
+//                System.out.println("Enter your first name again the previous entered name already exists: ");
+//                fn = sc.nextLine();
+//            }
+//            if(flag==false){
+//                p.setFirstName(fn);
+//            }
+//        }
+
+
 
         System.out.println("Enter your last name: ");
         String ln = sc.nextLine();
@@ -96,13 +129,13 @@ public class AddressBookService {
     }
 
     //main editing method that edits details directly in the hashmap
-    public void editDetails(String searchName, AddressBook a1){
+    public void editDetails(String searchName, AddressBook a1, ArrayList<AddressBook> addressBooks ){
         for(Map.Entry<Integer, Person> entry : a1.contactList.entrySet()) {
             if(entry.getValue().getFirstName().equalsIgnoreCase(searchName)){
                 System.out.println("\n***Person found***");
                 Person p = new Person();
                 System.out.println("\nEnter new details");
-                setValues(p);
+                setValues(p,a1);
                 Integer key = entry.getKey();
                 a1.contactList.put(key,p);
                 return;
@@ -167,7 +200,7 @@ public class AddressBookService {
     //Function for entering values in the hashmap
     public void insertValues(Person p, AddressBookService s, AddressBook a, Integer i) {
         System.out.println("Set the values:");
-        s.setValues(p);
+        s.setValues(p,a);
         s.display(p);
         a.contactList.put(i, p);
     }
@@ -195,7 +228,7 @@ public class AddressBookService {
             if(addressBooks.get(position-1).contactList.isEmpty()) {
                 System.out.println("No addressbook found of that number");
             }else {
-                editDetails(searchName, addressBooks.get(position-1));
+                editDetails(searchName, addressBooks.get(position-1),addressBooks);
             }
             System.out.println("\n\nUpdated hashmap:");
             for (Map.Entry<Integer, Person> entry : addressBooks.get(position-1).contactList.entrySet()) {
