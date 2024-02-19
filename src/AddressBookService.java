@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.stream.Collectors;
 
 
 public class AddressBookService {
@@ -39,9 +40,6 @@ public class AddressBookService {
             }
         }
 
-
-
-
 //        for (AddressBook a : addressBooks){
 //            String finalFn = fn.toLowerCase();
 //            if(!(a.contactList.values().stream().map(obj-> Objects.equals(obj.getFirstName(), finalFn)).findAny().isPresent())){
@@ -55,7 +53,6 @@ public class AddressBookService {
 //                p.setFirstName(fn);
 //            }
 //        }
-
 
 
         System.out.println("Enter your last name: ");
@@ -296,4 +293,45 @@ public class AddressBookService {
 
 
     }
+
+    public void searchByCityNState(ArrayList<AddressBook> addressBooks) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the State or city you want to look into:");
+        String cityOrState = sc.nextLine();
+        List<Person> foundNames = new ArrayList<>();
+
+        for (AddressBook a : addressBooks){
+            List<Person> contactsInCityNState = a.contactList.values().stream()
+                    .filter(personEntery -> personEntery.getCity().equalsIgnoreCase(cityOrState) || personEntery.getState().equalsIgnoreCase(cityOrState))
+                    .collect(Collectors.toList());
+            foundNames.addAll(contactsInCityNState);
+
+        }
+        System.out.println(foundNames);
+
+    }
 }
+
+
+//        Optional<Integer> check =null;
+//        for (AddressBook a : addressBooks){
+//            String finalCityOrState = cityOrState.toLowerCase();
+//            check = a.contactList.entrySet().stream().flatMap().filter(personEntery-> personEntery.getValue().getCity().equalsIgnoreCase(finalCityOrState) || personEntery.getValue().getState().equalsIgnoreCase(finalCityOrState)).map(Map.Entry::getKey).findAny();
+//            if(check.isPresent()){
+//                System.out.println("\nFound the state or city");
+//                System.out.println("value in check is "+check);
+//
+//            }
+//        }
+//        if (!check.isPresent()){
+//            System.out.println("\nCity or State Not found");
+//        }
+
+
+
+
+//        List Matched = addressBooks.stream()
+//            .flatMap(AddressBook -> AddressBook.contactList.values().stream())
+//            .filter(s->s.getCity().equalsIgnoreCase(cityOrState) || s.getState().equalsIgnoreCase(cityOrState))
+//            .collect(Collectors.toList());
+//        System.out.println(Matched);

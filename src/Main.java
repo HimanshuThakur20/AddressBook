@@ -12,7 +12,7 @@ public class Main {
 
         System.out.println("\n### Welcome to the address book system ###\n");
         while (true) {
-            System.out.println("\nEnter what you want to perform---- \n" +
+            System.out.println("\n Enter what you want to perform---- \n" +
                     "1-Enter values in 1 address book \n" +
                     "2- Enter values in specified no of address books\n" +
                     "3- Update values using name in an specified address book\n" +
@@ -20,6 +20,7 @@ public class Main {
                     "5- Display the address books\n" +
                     "6- Save Address books into a txt file\n" +
                     "7- Retrive address books from a txt file\n" +
+                    "8- Search for all the persons in a city or state\n" +
                     "0- Exit the address book system");
             int choice = sc.nextInt();
 
@@ -55,6 +56,9 @@ public class Main {
                 case 7:
                     String fileName2 = "AddressBook.txt";
                     s1.fileHandler(fileName2,false,addressBooks);
+                    break;
+                case 8:
+                    s1.searchByCityNState(addressBooks);
                     break;
                 default:
                     System.out.println("Invalid entry");
